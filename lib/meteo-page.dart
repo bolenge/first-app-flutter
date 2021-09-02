@@ -8,8 +8,23 @@ class MeteoPage extends StatefulWidget {
 class _MeteoPageState extends State<MeteoPage> {
   int counter = 0;
 
+  void _increment() {
+    setState(() {
+      ++counter;
+    });
+  }
+
+  void _decrement() {
+    setState(() {
+      --counter;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: TextStyle(fontSize: 18));
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Meteo Page'),
@@ -25,11 +40,19 @@ class _MeteoPageState extends State<MeteoPage> {
             ElevatedButton(
               child: Text('Incrementer'),
               onPressed: () {
-                setState(() {
-                  ++counter;
-                });
+                _increment();
               },
-              style: ButtonStyle(),
+              style: style,
+            ),
+            RaisedButton(
+              child: Text(
+                'Descrementer',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.deepOrange,
+              onPressed: () {
+                _decrement();
+              },
             )
           ],
         ));
