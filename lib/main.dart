@@ -3,6 +3,7 @@ import './home-page.dart';
 import './gallery-page.dart';
 import './meteo-page.dart';
 import './quiz-page.dart';
+import './towns-page.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -69,6 +70,18 @@ class MyApp extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => GalleryPage())
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text('Villes', style: TextStyle(fontSize: 15)),
+              leading: Icon(Icons.map_sharp),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TownsPage())
                 );
               },
             ),
