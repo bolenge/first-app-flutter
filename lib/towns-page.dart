@@ -21,4 +21,25 @@ class _TownsPageState extends State<TownsPage> {
       ),
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    loadTowns();
+  }
+
+  void loadTowns() {
+    String url = "http://192.168.43.74:8000";
+
+    http
+      .get(Uri.parse(url))
+      .then((resp) => {
+            setState(() {
+              this.listTowns = json.decode(resp.body)['results'];
+            })
+          })
+      .catchError((onError) => {
+        
+      });
+  }
 }
