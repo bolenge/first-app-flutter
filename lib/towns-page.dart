@@ -17,7 +17,28 @@ class _TownsPageState extends State<TownsPage> {
         title: Text('Villes'),
       ),
       body: Center(
-        child: Text('Liste des villes'),
+        child: this.listTowns == null ? CircularProgressIndicator() :
+          ListView.builder(
+            itemCount: this.listTowns == null ? 0 : this.listTowns.length,
+            itemBuilder: (context, index) {
+              return Card(
+                color: Colors.orange,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                    color: Colors.white,
+                    child: Text(
+                      this.listTowns[index]['name'],
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
+
+                    },
+                  ),
+                ),
+              );
+            }
+          ),
       ),
     );
   }
@@ -29,7 +50,7 @@ class _TownsPageState extends State<TownsPage> {
   }
 
   void loadTowns() {
-    String url = "http://192.168.43.74:8000";
+    String url = "http://192.168.43.74:8000/towns";
 
     http
       .get(Uri.parse(url))
@@ -38,8 +59,8 @@ class _TownsPageState extends State<TownsPage> {
               this.listTowns = json.decode(resp.body)['results'];
             })
           })
-      .catchError((onError) => {
-        
+      .catchError((err) => {
+        print(err)
       });
   }
 }
